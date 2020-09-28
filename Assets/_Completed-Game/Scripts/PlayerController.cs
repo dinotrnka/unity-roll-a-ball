@@ -1,7 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using UnityEngine.UI;
+using UnityEngine;
+
+#if UNITY_IOS || UNITY_TVOS
+public class NativeAPI {
+    [DllImport("__Internal")]
+    public static extern void sendMessageToMobileApp(string message);
+}
+#endif
 
 public class PlayerController : MonoBehaviour {
 	public float speed;
@@ -14,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 		count = 0;
-		SetCountText ();
+		SetCountText();
 		winText.text = "";
 	}
 
@@ -42,12 +51,23 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+    void sendScoreToMobileApp()
+    {
+#if UNITY_IOS || UNITY_TVOS
+        NativeAPI.sendMessageToMobileApp(count.ToString());
+#elif UNITY_ANDROID
+        // Put Android-specific communication code here
+#endif
+    }
+
 	void SetCountText() {
-		countText.text = "Score: " + count.ToString ();
+		countText.text = "Score: " + count.ToString();
+		sendScoreToMobileApp(); // Send score to mobile app each time a cube is collected
 
 		if (count >= 6)  {
 			winText.text = "You Win!";
 			countText.text = "";
+			Application.Unload(); // Quit Mendi Unity game but not the mobile app
 		}
 	}
 

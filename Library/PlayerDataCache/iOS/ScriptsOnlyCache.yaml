@@ -22,6 +22,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Text
+    com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
   sceneClasses:
     Assets/_Completed-Game/Roll-a-ball.unity:
     - Class: 1
@@ -371,12 +373,6 @@ ScriptsOnlyBuild:
     className: NetworkTransformVisualizer
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: metoda
-  - hash:
-      serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -720,4 +716,4 @@ ScriptsOnlyBuild:
   platform: 9
   scenePathNames:
   - Assets/_Completed-Game/Roll-a-ball.unity
-  playerPath: /Users/dinotrnka/Documents/roll-a-ball-red
+  playerPath: /Users/dinotrnka/Documents/git/roll-a-ball-messaging
